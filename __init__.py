@@ -240,7 +240,7 @@ class UV_OT_op_debug(bpy.types.Operator):
 
 
 class UV_OT_op_disable_uv_sync(bpy.types.Operator):
-    bl_idname = "uv.op_disable_sync"
+    bl_idname = "uv.op_disable_uv_sync"
     bl_label = "Disable Sync"
     bl_description = "Disable UV sync mode"
 
@@ -1458,18 +1458,12 @@ def register():
     
 
 
-
-def unregister():
-    #GUI Utilities
-    # utilities_ui.unregister()
-    
     from bpy.utils import unregister_class
     for cls in reversed(classes):
         unregister_class(cls)
 
     #Unregister Icons
     utilities_ui.icon_unregister()
-
 
     #Unregister Settings
     del bpy.types.Scene.texToolsSettings
@@ -1479,6 +1473,9 @@ def unregister():
         km.keymap_items.remove(kmi)
     keymaps.clear()
 
+    #GUI Utilities
+    utilities_ui.unregister()
+
     bpy.types.IMAGE_MT_uvs.remove(menu_IMAGE_uvs)
     bpy.types.IMAGE_MT_select.remove(menu_IMAGE_select)
     bpy.types.IMAGE_MT_image.remove(menu_IMAGE_MT_image)
@@ -1486,7 +1483,6 @@ def unregister():
     bpy.types.VIEW3D_MT_add.remove(menu_VIEW3D_MT_mesh_add)
     bpy.types.VIEW3D_MT_uv_map.remove(menu_VIEW3D_MT_uv_map)
     bpy.types.VIEW3D_MT_object_context_menu.remove(menu_VIEW3D_MT_object_context_menu)
-    
     
 
 if __name__ == "__main__":

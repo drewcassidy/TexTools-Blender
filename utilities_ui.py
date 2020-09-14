@@ -110,8 +110,8 @@ class op_popup(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
-        return wm.invoke_popup(self, width=200, height=200)
-
+        return wm.invoke_popup(self, width=200)
+ 
     def draw(self, context):
         self.layout.label(text=self.message)
 
@@ -155,15 +155,17 @@ def unregister():
     from bpy.types import WindowManager
     for preview_collection in preview_collections.values():
         bpy.utils.previews.remove(preview_collection)
-    preview_collections.clear()
+        preview_collection.clear()
+    
 
     # Unregister icons
     # global preview_icons
-    bpy.utils.previews.remove(preview_icons)
+    # bpy.utils.previews.remove(preview_icons)
+    preview_icons.clear()
+
 
     del bpy.types.Scene.TT_bake_mode
-
-
+   
 if __name__ == "__main__":
     register()
 bpy.utils.register_class(op_popup)
