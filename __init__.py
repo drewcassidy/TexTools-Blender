@@ -1390,7 +1390,7 @@ def register():
     for cls in classes:
         register_class(cls)
 
-#Register settings
+    #Register settings
     bpy.types.Scene.texToolsSettings = bpy.props.PointerProperty(type=TexToolsSettings)
 
     #GUI Utilities
@@ -1456,8 +1456,10 @@ def register():
     bpy.types.VIEW3D_MT_uv_map.append(menu_VIEW3D_MT_uv_map)
     bpy.types.VIEW3D_MT_object_context_menu.append(menu_VIEW3D_MT_object_context_menu)
     
-
-
+def unregister():
+    #GUI Utilities
+    # utilities_ui.unregister()
+    
     from bpy.utils import unregister_class
     for cls in reversed(classes):
         unregister_class(cls)
